@@ -1,0 +1,41 @@
+usuarios = {"john": "123", "maria": "456"} 
+
+print("1 - Adicionar usuário")
+print("2 - Entrar (login)")
+print("3 - Sair")
+
+opcao = input("Escolha uma opção: ")
+
+while opcao != "3": 
+    if opcao == "1":
+        usuario = input("Digite o nome de usuário: ")
+        
+        senha = input("Digite a senha: ")
+
+        if usuario in usuarios:
+            print("Usuário já existe!")
+        else:
+            
+            print("Usuário cadastrado com sucesso!")
+
+        
+        opcao = input("Escolha uma opção: ")
+
+    elif opcao == "2":
+        usuario_login = input("Usuário: ")
+        senha_login = input("Senha: ")
+
+        if usuario_login in usuarios and usuarios[usuario_login] == senha_login:
+            print(f"Bem-vindo, {usuario_login}!")
+        else:
+            print("Usuário ou senha incorretos!")
+        
+        
+        opcao = input("Escolha uma opção: ")
+
+    else:
+        print("Opção inválida! Tente novamente.")
+       
+        opcao = input("Escolha uma opção: ")
+
+print("Saindo do sistema...")
