@@ -1,4 +1,11 @@
-def senha_valida (senha_usu)
-
 perg = input("Digite sua senha: ")
-while 
+
+def senha_valida(senha):
+
+    while len(senha) < 6:
+        senha = input("Digite sua senha: ")
+    print("Senha cadastrada com sucesso!")
+
+senha_valida(perg)
+
+

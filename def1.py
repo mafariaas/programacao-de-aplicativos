@@ -1,6 +1,6 @@
 nota = int(input("Digite sua nota: "))
 
-def avaliar_desempenho (nota):
+def avaliar_desempenho(nota):
     if nota >= 9:
         print("Exelente")
     elif nota >= 7:
