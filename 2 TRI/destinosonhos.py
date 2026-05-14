@@ -1,6 +1,5 @@
 def criar_arquivo():
     open('viagens.txt' , 'w').close()
-criar_arquivo()
 
 def add():
     destino = input("Digite os lugares que deseja visitar: ")
@@ -46,7 +45,7 @@ def deletar():
     print("Lugar removido!")
 
 while True:
-    print("---PLANEJADOR DE VIAGENS---")
+    print("\n---PLANEJADOR DE VIAGENS---")
     print("\n1-Adicionar destino")
     print("2-Listar Sugestões")
     print("3-Editar Sugestão")
