@@ -1,0 +1,30 @@
+[
+    {
+        "nome": "Maria",
+        "telefone": "44000000000",
+        "turma": "2",
+        "idade": 16,
+        "cpf": "11111111111"
+    },
+    {
+        "nome": "Melissa",
+        "telefone": "44999836354",
+        "turma": "2",
+        "idade": 16,
+        "cpf": "12345678"
+    },
+    {
+        "nome": "Mari",
+        "telefone": "44999999999",
+        "turma": "2",
+        "idade": 16,
+        "cpf": "12345678"
+    },
+    {
+        "nome": "Maria Helena",
+        "telefone": "40028921",
+        "turma": "3",
+        "idade": 4,
+        "cpf": "55667788"
+    }
+]
