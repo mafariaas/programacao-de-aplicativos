@@ -2,6 +2,29 @@ import sqlite3
 conexao = sqlite3.connect('escola_demonstracao.db')
 cursor = conexao.cursor()
 
+def listar_professor():
+    cursor.execute("SELECT * FROM professores")
+
+    todos_professores = cursor.fetchall()
+
+    print("=====PROFESSORES CADASTRADOS=====")
+
+    if not todos_professores:
+        print("Nenhum professor cadastrado!")
+
+    else:
+        for professor in todos_professores:
+            print(f"ID: {professor[0]}")
+            print(f"Nome: {professor[1]}")
+            print(f"Telefone: {professor[2]}")
+            print(f"Matéria: {professor[3]}")
+            print(f"Idade: {professor[4]}")
+            print(f"CPF: {professor[5]}")
+            print(f"salario: {professor[6]}")
+            print(f"Nome escola: {professor[7]}")
+            print(f"Endereço: {professor[8]}")
+            print("-" * 30)
+
 def criar_tabela():
     listar_professor()
     cursor.execute('''
@@ -13,7 +36,10 @@ def criar_tabela():
                     idade INTEGER,
                     cpf TEXT UNIQUE NOT NULL,
                     professor_id INTEGER,
-                    FOREIGN KEY (professor_id) REFERENCES professor(id)
+                    endereco_aluno TEXT,
+                    cidade_aluno TEXT,
+                    estado_aluno TEXT,
+                    FOREIGN KEY (professor_id) REFERENCES professores(id) 
                     )''')
 
     nome_aluno = input("Insira o nome do aluno a seguir: ")
@@ -21,14 +47,16 @@ def criar_tabela():
     turma_aluno = input ("Insira a turma do aluno a seguir: ")
     idade_aluno = int(input("Insira a idade do aluno a seguir: "))
     cpf_aluno = input("Informe o cpf do aluno a seguir: ")
-    professor_id = int(input("Digite o ID do professor: "))   
+    professor_id = int(input("Digite o ID do professor: ")) 
+    endereco_aluno = input("Insira o endereço do aluno: ")
+    cidade_aluno = input("Digite a cidade do aluno: ")
+    estado_aluno = input("Digite o estado do aluno: ")
     comando_inserir = (f'''
-                        INSERT INTO alunos (nome, telefone, turma, idade, cpf, professor_id)
-                        VALUES ('{nome_aluno}', '{telefone_aluno}', '{turma_aluno}', '{idade_aluno}', '{cpf_aluno}', {professor_id})''')
+                        INSERT INTO alunos (nome, telefone, turma, idade, cpf, professor_id, endereco_aluno, cidade_aluno, estado_aluno   )
+                        VALUES ('{nome_aluno}', '{telefone_aluno}', '{turma_aluno}', '{idade_aluno}', '{cpf_aluno}', {professor_id}, '{endereco_aluno}', '{cidade_aluno}', '{estado_aluno}')''')
 
     cursor.execute(comando_inserir)
     conexao.commit()
-    conexao.close() 
 
 def listar():
     cursor.execute("SELECT * FROM alunos")
@@ -48,6 +76,9 @@ def listar():
             print(f"Turma: {aluno[3]}")
             print(f"Idade: {aluno[4]}")
             print(f"CPF: {aluno[5]}")
+            print(f"Endereço: {aluno[6]}")
+            print(f"Cidade: {aluno[7]}")
+            print(f"Estado: {aluno[8]}")
             print("-" * 30)
 
 def alterar():
@@ -117,11 +148,12 @@ def menu():
         elif opcao == 3: alterar()
         elif opcao == 4: excluir()
         elif opcao == 5:
-            conexao.close()
             print("Programa encerrado!")
             break
 
 menu()
+
+
 
 def criar_tabela_professor():
     cursor.execute('''
@@ -133,7 +165,8 @@ def criar_tabela_professor():
                     idade INTEGER,
                     cpf TEXT UNIQUE NOT NULL,
                     salario REAL,
-                    escola TEXT
+                    escola TEXT,
+                    endereco_professor TEXT
                     )''')
     nome_professor = input("Informe o nome do professor: ")
     telefone_professor = input("Informe o telefone do professor: ")
@@ -142,36 +175,13 @@ def criar_tabela_professor():
     cpf_professor = input("Digite o cpf do professor: ")
     salario_professor = float(input("Digite o salário do professor: "))
     nome_escola = input("Informe o nome da escola: ")
-    
+    endereco_professor = input("Digite o endereço do professor: ")
     comando_inserir = (f'''
-                    INSERT INTO professores (nome, telefone, materia, idade, cpf, salario, escola)
-                    VALUES ('{nome_professor}', '{telefone_professor}', '{materia_professor}', {idade_professor}, '{cpf_professor}', {salario_professor}, '{nome_escola}')''')
+                    INSERT INTO professores (nome, telefone, materia, idade, cpf, salario, escola, endereco_professor)
+                    VALUES ('{nome_professor}', '{telefone_professor}', '{materia_professor}', {idade_professor}, '{cpf_professor}', {salario_professor}, '{nome_escola}', '{endereco_professor}')''')
 
     cursor.execute(comando_inserir)
     conexao.commit()
-
-def listar_professor():
-    cursor.execute("SELECT * FROM professores")
-
-    todos_professores = cursor.fetchall()
-
-    print("=====PROFESSORES CADASTRADOS=====")
-
-    if not todos_professores:
-        print("Nenhum professore cadastrado!")
-
-    else:
-        for professor in todos_professores:
-            print(f"ID: {professor[0]}")
-            print(f"Nome: {professor[1]}")
-            print(f"Telefone: {professor[2]}")
-            print(f"Matéria: {professor[3]}")
-            print(f"Idade: {professor[4]}")
-            print(f"CPF: {professor[5]}")
-            print(f"salario: {professor[6]}")
-            print(f"Nome escola: {professor[7]}")
-            print("-" * 30)
-
 
 def alterar_professor():
     listar()
@@ -228,10 +238,10 @@ def menu():
         elif opcao == 3: alterar_professor()
         elif opcao == 4: excluir_professor()
         elif opcao == 5:
-            conexao.close()
             print("Programa encerrado!")
             break
 
 menu()
- 
+
+conexao.close() 
 
