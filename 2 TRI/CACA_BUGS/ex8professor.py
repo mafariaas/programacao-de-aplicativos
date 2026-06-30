@@ -1,0 +1,3 @@
+import sqlite3
+
+def cadastrar_professores
