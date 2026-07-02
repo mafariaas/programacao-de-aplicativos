@@ -14,5 +14,10 @@ def criar_tabelas():
         )
 ''')
 
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS series (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            nome TEXT
+        )
     conexao.commit()
-    conexao.close()
+    conexao.close() 
