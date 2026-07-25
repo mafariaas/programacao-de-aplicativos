@@ -6,7 +6,10 @@ def deletar_escola_antiga():
     cursor = conexao.cursor()
 
     # Esse comando vai apagar o banco inteiro se o aluno não prestar atenção.
-    cursor.execute("DELETE FROM escolas WHERE id = id_escola")
+    cursor.execute(f"DELETE FROM escolas WHERE id? = {id_escola}")
 
     conexao.commit()
     conexao.close()
+
+# Estava sem o ponto de interrogação que mostra o que tem que ser apagado
+# Estava sem o 'f' e as chaves para mostrar a variável 'id_escola'
