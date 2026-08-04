@@ -11,9 +11,17 @@ def inicializar_banco():
     )
     ''')
 
-# o banco não está salvando as alterações. Por quê?
-    conexao.commit() # Correção: Estava sem o conexao.commit, que salva o programa
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS series (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        nome_serie TEXT NOT NULL,
+        id_escola INTEGER,
+        FOREIGN KEY (id_escola) REFERENCES escolas(id)
+        )
+        ''')
+
+    conexao.commit() 
     conexao.close()
 
-chamada = inicializar_banco()
-print(chamada)
+    print("Banco de dados criado ")
+inicializar_banco()

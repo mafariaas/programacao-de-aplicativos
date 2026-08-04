@@ -3,13 +3,20 @@ import sqlite3
 def cadastrar_serie(nome_serie, id_escola):
     conexao = sqlite3.connect('sistema_escola.db')
     cursor = conexao.cursor()
-    # O aluno tenta cadastrar uma série com id_escola = 999 (ue não existe).
-    # O sqlite aceita o cadastro mesmo assim. O que está faltando ativar?
+    
+    cursor.execute("PRAGMA foreign_keys = ON;") # Faltava a verificao de chaves
+
     try:
-            cursor.execute("PRAGMA foreign_keys = ON;") # Faltava a verificao de chaves
-            cursor.execute("INSERT INTO series(nome_serie, id_escola)VALUES (?, ?)", (nome_serie, id_escola))
-            conexao.commit()
-        except sqlite3.IntegrityError:
-            print("Erro: Escola inexistente!")
-        finally:
-            conexao.close()
+        cursor.execute(
+            "INSERT INTO series (nome_serie, id_escola) VALUES (?, ?)", (nome_serie, id_escola)
+            )
+
+        conexao.commit()
+        print("Série cadastrada com sucesso!")
+
+    except sqlite3.IntegrityError:
+        print("Erro: Escola inexistente!")
+    finally:
+        conexao.close()
+
+cadastrar_serie("2º ano", 1)

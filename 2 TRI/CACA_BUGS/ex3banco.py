@@ -19,5 +19,10 @@ def criar_tabelas():
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             nome TEXT
         )
+       ''') 
+
     conexao.commit()
     conexao.close() 
+    print("Tabela criada com sucesso!")
+criar_tabelas()
+
