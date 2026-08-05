@@ -6,7 +6,7 @@ def cadastrar_hopital():
 
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS hospitais (
-        id INTEGER UNIQUE PRIMARY KEY AUTOINCREMENT,
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
         nome TEXT NOT NULL,
         cidade TEXT NOT NULL
         )
@@ -18,6 +18,7 @@ def cadastrar_hopital():
                            
                             
         print("Hospital cadastrado!")
+        cursor.execute(comando_inserir, nome_hospital, cidade_loc)
         conexao.commit()
     except ValueError as e:
         print("Digite apenas nomes! ", e)
@@ -35,7 +36,7 @@ def cadastrar_medicos():
 
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS medicos (
-        id INTEGER UNIQUE PRIMARY KEY,
+        id INTEGER PRIMARY KEY,
         nome TEXT NOT NULL,
         crm INTEGER UNIQUE NOT NULL,
         id_hospital INTEGER,
@@ -46,18 +47,17 @@ def cadastrar_medicos():
         nome_medico = input("Informe o nome do médico: ")
         crm = int(input("Informe o crm do médico: "))
         id_hospital = int(input("Informe o id do hospital em que o médico trabalha: "))
-        comando_inserir = (f'''
-                            (INSERT INTO medicos (nome, crm, id_hospital) )
-                            VALUES ('{nome_medico}', '{crm}', '{id_hospital}')''')
-
+        comando_inserir = "(INSERT INTO medicos (nome, crm, id_hospital) ) VALUES (?, ?, ?)"
+                            
         print("Médico cadastrado com sucesso!")
+        cursor.execute(comando_inserir, nome_medico, crm, id_hospital)
         conexao.commit()
 
     except ValueError as e:
-        ("Digite apenas números!", e)
+        print("Digite apenas números!", e)
     
     except sqlite3.IntegrityError as e:
-        ("Erro! Informações já cadastradas! ", e)
+        print("Erro! Informações já cadastradas! ", e)
 
     finally:
         conexao.close()
@@ -65,3 +65,4 @@ def cadastrar_medicos():
 
 cadastrar_hopital()
 cadastrar_medicos()
+
