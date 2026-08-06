@@ -4,8 +4,6 @@ def cadastrar_serie(nome_serie, id_escola):
     conexao = sqlite3.connect('sistema_escola.db')
     cursor = conexao.cursor()
     
-    cursor.execute("PRAGMA foreign_keys = ON;") # Faltava a verificao de chaves
-
     try:
         cursor.execute(
             "INSERT INTO series (nome_serie, id_escola) VALUES (?, ?)", (nome_serie, id_escola)

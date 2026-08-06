@@ -1,22 +1,38 @@
 import sqlite3
 
+def criar_tabela_aluno():
+    conexao = sqlite3.connect('sistema_escola.db')
+    cursor = conexao.cursor()
+
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS alunos (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        nome TEXT NOT NULL,
+        id_serie INTEGER,
+        FOREIGN KEY (id_serie) REFERENCES series(id)
+        )
+    ''')
+    conexao.close()
+    
 def vincular_aluno_turma():
-    nome = input("Nome do aluno: ")
-    # Se o usuário digitar "Turma B" em vez do número do ID, o sistema quebra.
-    # O try/except abaixo falhou em capturar esse erro. Qual o problema? 
+    
     try:
-        id_turma = int(input("Digite o ID numérico da turma: "))
+        nome = input("Nome do aluno: ")
+        id_serie = int(input("Digite o ID numérico da turma: "))
 
         conexao = sqlite3.connect('sistema_escola.db')
         cursor = conexao.cursor()
-        cursor.execute("INSERT INTO alunos (nome, id_turma) VALUES (?, ?)", (nome, id_turma))
+        
+        cursor.execute("INSERT INTO alunos (nome, id_serie) VALUES (?, ?)", (nome, id_serie))
         conexao.commit()
+        print("Aluno cadastrado com sucesso!")
+
     except ValueError:
         print("Erro! Digite apenas o número do ID!")
-    except sqlite3.Error:
-        print("Erro no banco de dados!")
+    except sqlite3.Error as e:
+        print("Erro no banco de dados!", e)
     finally:
         conexao.close()
 
-# O erro acontece porque o except tratava apenas erros do proprio banco de dados, e quando se trata de operação inválida para a operação se utiliza 'ValueError'
-# Então adicionamos um except de ValueError e dessa forma o código não é quebrado
+vincular_aluno_turma()
+criar_tabela_aluno()
