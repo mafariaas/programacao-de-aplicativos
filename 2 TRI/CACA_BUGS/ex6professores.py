@@ -1,29 +1,45 @@
 import sqlite3
 
-def buscar_professores(id_prof):
+
+def cadastrar_professores():
     conexao = sqlite3.connect('sistema_escola.db')
     cursor = conexao.cursor()
-
-cursor.execute('''
+    cursor.execute('''
         CREATE TABLE IF NOT EXISTS professores (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             nome TEXT NOT NULL
         )
     ''')
+    nome = input("Digite o nome do professor que deseja cadastrar: ")
+    id_prof = int(input("Digite o ID do professor: "))
+    
+    cursor.execute("INSERT INTO professores(id, nome) VALUES (?, ?)", (id_prof, nome) )
 
-        nome_prof = input("Informe o nome do professor")
-        conexao.commit()
-        cursor.execute("SELECT nome FROM professores WHERE id = ?", (id_prof,) )
+    print("Professor cadastrado com sucesso")
+
+    conexao.commit()
+    conexao.close()
+
+
+def buscar_professor():
+    conexao = sqlite3.connect('sistema_escola.db')
+    cursor = conexao.cursor()
+    
+    procurar_prof = int(input("Informe o ID do professor que deseja encontrar: "))
+    cursor.execute(
+        "SELECT id FROM professores WHERE id = ?",
+        (procurar_prof,)
+    )
+
 
     resultado = cursor.fetchone()
-    print(resultado)
-    conexao.close
 
     if resultado:
-        print("Professor encotrado:", resultado[0])
+        print("Professor encontrado:", resultado)
     else:
         print("Professor não encontrado!")
 
     conexao.close()
 
-buscar_professores(1)
+cadastrar_professores()
+buscar_professor()   
