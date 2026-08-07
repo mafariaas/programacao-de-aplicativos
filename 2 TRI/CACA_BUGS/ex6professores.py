@@ -11,9 +11,8 @@ def cadastrar_professores():
         )
     ''')
     nome = input("Digite o nome do professor que deseja cadastrar: ")
-    id_prof = int(input("Digite o ID do professor: "))
     
-    cursor.execute("INSERT INTO professores(id, nome) VALUES (?, ?)", (id_prof, nome) )
+    cursor.execute("INSERT INTO professores(nome) VALUES (?)", (nome,) )
 
     print("Professor cadastrado com sucesso")
 
@@ -27,7 +26,7 @@ def buscar_professor():
     
     procurar_prof = int(input("Informe o ID do professor que deseja encontrar: "))
     cursor.execute(
-        "SELECT id FROM professores WHERE id = ?",
+        "SELECT * FROM professores WHERE id = ?",
         (procurar_prof,)
     )
 

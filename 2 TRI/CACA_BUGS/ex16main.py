@@ -7,5 +7,8 @@ def menu():
         if opcao == "1":
             print("Cadastrando...")
         elif opcao == "2":
-            print("Saindo do programa.")
-            #Por que o programa continua rodando e mostrando o menu mesmo digitando 2? 
+            print("Saindo do programa")
+            break
+                         
+   
+menu()
