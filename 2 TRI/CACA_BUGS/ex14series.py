@@ -16,5 +16,8 @@ def cadastrar_serie_seguro(nome, id_escola):
             conexao.close()
         
 
-# Dava erro pois a conexão tem possibilidade de dar erro e se der, o finally fecha algo com erro
-# Então adicionamos uma variável de conexão vazia
+
+# Dava erro porque se a conexão falhasse, o 'finally' tentaria fechar uma variável que nem existia na memória ainda.
+# Criar 'conexao = None' no início resolve isso porque garante que a variável exista desde o começo.
+# Se o banco não abrir, a variável continua valendo como vazia (None).
+# O 'if conexao:' percebe que ela está vazia e não tenta fechar nada, impedindo o erro de acontecer.

@@ -35,3 +35,6 @@ def cadastrar_professores(nome, cpf):
 
 cadastrar_professores("Gabriel Moya", "000-000-000.00")
 
+# O cpf estava sem o comando 'UNIQUE', par aresolver diretamente na tabela utilizamos o comando 
+# drop table e recriamos a tabela com as informações corretas, dessa forma o campo CPF  só 
+# aceita informações com sequências unicas 

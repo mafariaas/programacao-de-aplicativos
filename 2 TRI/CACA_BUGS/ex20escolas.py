@@ -26,3 +26,5 @@ def cadastrar_escola_manual():
         conexao.close()
 
 cadastrar_escola_manual()
+
+# Para tratar o erro usamos o try para inserir na tabela escola e except para caso tentem utilizar o mesmo id 

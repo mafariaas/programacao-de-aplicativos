@@ -42,3 +42,7 @@ def cadastrar_turma():
         
 criar_tabela_turmas()
 cadastrar_turma()
+
+# Se o erro acontecesse o codigo quebraria e as outras informações não seriam salvas,
+# para resolver usamos try e except, assim caso o erro aconteça, as outras informações não são perdidas,
+# e a conexao é fechada, mostrando a mensagem avisando o erro cometido pelo usuário.

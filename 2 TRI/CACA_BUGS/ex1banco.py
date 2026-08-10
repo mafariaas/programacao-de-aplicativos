@@ -25,3 +25,5 @@ def inicializar_banco():
 
     print("Banco de dados criado ")
 inicializar_banco()
+
+# O banco não salvava as alterações pois estava sem o 'conexao.commit'

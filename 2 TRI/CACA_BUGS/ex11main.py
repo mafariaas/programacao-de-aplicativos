@@ -11,3 +11,4 @@ def listar_alunos_e_turmas():
         print(f"Aluno: {linha[0]} | Turma: {linha[1]}")
     conxao.close()
     
+# Sem a palavra 'ON' o código não sabe qual aluno pertence a qual turma 

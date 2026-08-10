@@ -36,3 +36,6 @@ def vincular_aluno_turma():
 
 vincular_aluno_turma()
 criar_tabela_aluno()
+
+# O id é um INT, o except dado para tratar erros corrige apenas erros internos do banco de dados,
+# para resolver isso adicionamos outro except que capture erros de valor, 'ValueError'

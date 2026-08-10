@@ -25,3 +25,4 @@ def criar_tabelas():
     print("Tabela criada com sucesso!")
 criar_tabelas()
 
+# Quebrava pois tentava puxar referencia de um campo que não foi preenchido ainda

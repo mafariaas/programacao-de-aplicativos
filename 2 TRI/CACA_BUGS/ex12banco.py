@@ -10,4 +10,6 @@ def inserir_escola(nome):
     conexao.commit()
     conexao.close()
 
+inserir_escola()
+
 # Como foi criado fora da função não vai ser executado

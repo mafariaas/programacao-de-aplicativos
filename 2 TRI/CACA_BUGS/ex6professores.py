@@ -42,3 +42,5 @@ def buscar_professor():
 
 cadastrar_professores()
 buscar_professor()   
+
+# Mostrava essa menssagem pois faltava uma virgula dentro do select porque ele só executa se tiver duas variaveis e para "burlar" colocamos uma vírgula.

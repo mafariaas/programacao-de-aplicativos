@@ -4,6 +4,8 @@ def cadastrar_serie(nome_serie, id_escola):
     conexao = sqlite3.connect('sistema_escola.db')
     cursor = conexao.cursor()
     
+    cursor.execute("PRAGMA foreign_keys = ON")
+
     try:
         cursor.execute(
             "INSERT INTO series (nome_serie, id_escola) VALUES (?, ?)", (nome_serie, id_escola)
@@ -18,3 +20,6 @@ def cadastrar_serie(nome_serie, id_escola):
         conexao.close()
 
 cadastrar_serie("2º ano", 1)
+
+# Faltava a verificação de chave estrangeira, por isso o o sqlite aceitava, pois sem o 'PRAGMA'
+# ele não consegue verificar se aquela informação existe na outra tabela

@@ -16,3 +16,6 @@ def cadastrar_lista_alunos():
     print("Alunos cadastrados com sucesso!")
 
 cadastrar_lista_alunos()
+
+# O comando 'cursor.execute' sem o 'many' executa apenas uma vez, para utiliza-lo de forma correta
+# se escreve assim: 'cursor.executemany' dessa forma ele executa mais de uma vez

@@ -18,3 +18,6 @@ materia = input("Digite a matéria: ")
 cpf = input("Informe o cpf: ")
 
 inserir_professor(nome, materia, cpf)
+
+# O programa mostrava 'CPF já cadastrado' em vez do real erro pois o except estava sem o comando 'as e:'
+# Com esse comando o terminal mostra a menssagem e o real motivo de ter dado o erro.

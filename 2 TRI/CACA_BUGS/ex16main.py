@@ -12,3 +12,5 @@ def menu():
                          
    
 menu()
+
+# O código não quebrava, faltava o comando 'break' para encerrar o código

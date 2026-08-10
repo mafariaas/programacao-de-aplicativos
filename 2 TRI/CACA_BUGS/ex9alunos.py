@@ -14,3 +14,6 @@ novo_nome = input("Digite o novo nome: ")
 print("Nome atualizado!")
 
 atualizar_nome_aluno()
+
+# O sistema alteroava o nome de todos os alunos pois estava sem o comando 'WHERE' ou seja, não expecificava 
+# o que deveria ser alterado, então ele alterava todos os alunos para o novo nome informado

@@ -21,3 +21,4 @@ def deletar_escola_antiga():
 
 deletar_escola_antiga()
 
+# Sem o ? o código entende que não existe uma informação expecífica para deletar e apaga tudo com o comando
