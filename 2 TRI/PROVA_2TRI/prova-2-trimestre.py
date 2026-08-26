@@ -41,24 +41,22 @@ def cadastrar_redes():
         plano_master = input("Informe o nome do plano: ")
         comando_inserir = "INSERT INTO redes_academia (nome_rede, plano_master) VALUES (?, ?)"
 
-        print("Cadastro concluido!")
-        cursor.execute(comando_inserir, nome_d_redes, plano_master)
+        cursor.execute(comando_inserir, (nome_d_redes, plano_master))
         conexao.commit()
+        print("Cadastro concluido!")
 
     except ValueError as e:
         print("Digite apenas nomes! ", e)
     except sqlite3.IntegrityError as e:
         print("Erro! Informações já cadastradas! ", e)
-
-    finally:
-        conexao.close()   
+  
 
 def listar_redes():
     cursor.execute("SELECT * FROM redes_academia")
 
     info_redes = cursor.fetchall()
 
-    print("=== REDES CADASTRADASTRADAS ===")
+    print(">>> REDES CADASTRADASTRADAS <<<")
 
     if not info_redes:
         print("Nenhuma informação encontrada!")
@@ -83,9 +81,6 @@ def atualizar_redes():
 
     except sqlite3.Error as e:
         print("Não foi possivel atualizar!", e)
-
-    finally:
-        conexao.close()
     
     
 def excluir_redes():
@@ -103,14 +98,12 @@ def excluir_redes():
     except sqlite3.Error as e:
             print("Erro: Escola não deletada.", e)
 
-    finally:
-        conexao.close()
             
 
 def menu_redes():
     opcao = 0
     while opcao != 5:
-        print("\n---CADASTRO DE REDES---")
+        print("\n>>> CADASTRO DE REDES <<<")
         print("\n1-Cadastrar")
         print("2-Listar")
         print("3-Atualizar")
@@ -124,39 +117,36 @@ def menu_redes():
         elif opcao == 3: atualizar_redes()
         elif opcao == 4: excluir_redes()
         elif opcao == 5:
-            print("Programa encerrado!")
+            print("~~~~ PROGRAMA DE REDES ENCERRADO! ~~~~")
             break
-menu_redes()
+
 
 def cadastrar_unidades():
-    conexao = sqlite3.connect('sistema_academia.db')
-    cursor = conexao.cursor()
-
     cursor.execute("PRAGMA foreign_keys = ON")
                    
     try:
         localizacao = input("Insira a localização da unidade: ")
-        id_rede = int(input("Informe o id da rede: "))
+
+        listar_redes()
+        id_rede = int(input("\nInforme o id da rede: "))
         comando_inserir = "INSERT INTO unidades (localizacao, id_rede) VALUES (?, ?)"
 
-        print("Cadastro concluido!")
-        cursor.execute(comando_inserir, localizacao, id_rede)
+        cursor.execute(comando_inserir, (localizacao, id_rede))
         conexao.commit()
+        print("Cadastro concluido!")
 
     except ValueError as e:
         print("Digite apenas nomes! ", e)
     except sqlite3.IntegrityError as e:
         print("Erro! Informações já cadastradas! ", e)
 
-    finally:
-        conexao.close()
 
 def listar_unidades():
     cursor.execute("SELECT * FROM unidades")
 
     info_unidades = cursor.fetchall()
 
-    print("=== UNIDADES CADASTRADASTRADAS ===")
+    print("\n>>> UNIDADES CADASTRADASTRADAS <<<")
 
     if not info_unidades:
         print("Nenhuma informação encontrada!")
@@ -167,12 +157,12 @@ def listar_unidades():
             print(f"Localização: {inf[1]}")
 
 def atualizar_unidades():
-    listar_redes()
+    listar_unidades()
 
     try:
         id_unidade = int(input("Insira o id da unidade que deseja alterar: "))
         nova_localizacao = input("Informe a nova localização: ")
-        cursor.execute("UPDATE unidades SET localizacao = ? WHERE id", (nova_localizacao, id_unidade))
+        cursor.execute("UPDATE unidades SET localizacao = ? WHERE id = ?", (nova_localizacao, id_unidade))
 
         conexao.commit()
         print("Unidade atualizada com sucesso!")
@@ -180,16 +170,13 @@ def atualizar_unidades():
     except sqlite3.Error as e:
         print("Não foi possivel atualizar!", e)
 
-    finally:
-        conexao.close()
 
 def excluir_unidades():
-    listar_redes()
-
+    listar_unidades()
 
     try:
         id_unidade = int(input("Informe o id da unidade que deseja excluir: "))
-        cursor.execute("DELETE FROM unidades WHERE id_unidade = ?", (id_unidade,))
+        cursor.execute("DELETE FROM unidades WHERE id = ?", (id_unidade,))
 
         conexao.commit()
         print("Unidade deletada com sucesso!")
@@ -197,13 +184,11 @@ def excluir_unidades():
     except sqlite3.Error as e:
             print("Erro: unidade não deletada.", e)
 
-    finally:
-        conexao.close()
 
 def menu_unidades():
     opcao = 0
     while opcao != 5:
-        print("\n---CADASTRO DE UNIDADES---")
+        print("\n>>> CADASTRO DE UNIDADES <<<")
         print("\n1-Cadastrar")
         print("2-Listar")
         print("3-Atualizar")
@@ -217,9 +202,13 @@ def menu_unidades():
         elif opcao == 3: atualizar_unidades()
         elif opcao == 4: excluir_unidades()
         elif opcao == 5:
-            print("Programa encerrado!")
+            print("~~~~ PROGRAMA ENCERRADO! ~~~~")
             break
+
+menu_redes()
 menu_unidades()
+
+conexao.close()
 
 
 
