@@ -6,7 +6,7 @@ def iniciar_banco():
         conexao = sqlite3.connect('gestao_escolar.db')
         cursor = conexao.cursor()
 
-        cursor.execute(PRAGMA foreign_keys = ON)
+        cursor.execute("PRAGMA foreign_keys = ON")
 
         cursor.execute('''
             CREATE TABLE IF NOT EXISTS escolas (

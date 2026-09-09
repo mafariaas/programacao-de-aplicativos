@@ -36,11 +36,11 @@ def listar_escolas():
 
         print(">>> ESCOLAS CADASTRADASTRADAS <<<")
 
-        if not info_redes:
+        if not info_escolas:
             print("Nenhuma informação encontrada!")
 
         else:
-            for inf in info_redes:
+            for inf in info_escolas:
                 print(f"ID: {inf[0]}")
                 print(f"Nome: {inf[1]}")
                 print(f"Cidade: {inf[2]}")
@@ -69,7 +69,7 @@ def atualizar_escolas():
         print("Não foi possivel atualizar!", e)
 
 
-def excluir_redes():
+def excluir_escolas():
     conexao = sqlite3.connect('gestao_escolar.db')
     cursor = conexao.cursor()
     listar_escolas()

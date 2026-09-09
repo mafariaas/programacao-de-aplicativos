@@ -2,17 +2,20 @@ import sqlite3
 conexao = None
 conexao = sqlite3.connect('gestao_escolar.db')
 cursor = conexao.cursor()
+from turma import listar_turmas
 
 
 def cadastrar_alunos():
+    listar_turmas()
     try:
         conexao = sqlite3.connect('gestao_escolar.db')
         cursor = conexao.cursor()
         nome_aluno = input("Insira o nome do aluno: ")
         idade_aluno = input("Informe a idade do aluno: ")
-        comando_inserir = "INSERT INTO alunos (nome, idade) VALUES (?, ?)"
+        id_turma = int(input("Informe o ID da turma: "))
+        comando_inserir = "INSERT INTO alunos (nome, idade, id_turma) VALUES (?, ?, ?)"
 
-        cursor.execute(comando_inserir, (nome_aluno, idade_aluno))
+        cursor.execute(comando_inserir, (nome_aluno, idade_aluno, id_turma))
         conexao.commit()
         print("Cadastro concluido!")
 
