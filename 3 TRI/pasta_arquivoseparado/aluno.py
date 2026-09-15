@@ -33,11 +33,12 @@ def listar_alunos():
     try:
         conexao = sqlite3.connect('gestao_escolar.db')
         cursor = conexao.cursor()
-        cursor.execute("SELECT * FROM alunos")
+
+        cursor.execute("SELECT * FROM alunos ORDER BY nome ASC")
 
         info_alunos = cursor.fetchall()
 
-        print(">>> ALUNOS CADASTRADASTRADAS <<<")
+        print(">>> ALUNOS CADASTRADOS <<<")
 
         if not info_alunos:
             print("Nenhuma informação encontrada!")
@@ -49,12 +50,10 @@ def listar_alunos():
                 print(f"Idade: {inf[2]}")
                 print(f"ID turma: {inf[3]}")
 
-
-    # AJEITAR O CODIGO ASSERT
-
     except sqlite3.Error as e:
         print("Erro do sqlite: ", e)
 
+        
 
 def atualizar_alunos():
     conexao = sqlite3.connect('gestao_escolar.db')
